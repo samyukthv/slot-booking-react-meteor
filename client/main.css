@@ -1,0 +1,9 @@
+*{
+  margin: 0   ;
+}
+
+@font-face {
+  font-family: 'Abril Fatface';
+  src: url('path-to-your-font/AbrilFatface-Regular.woff') format('woff'); /* Replace with the actual path to your font file */
+  /* You can include additional font formats here (e.g., woff2, ttf) for better browser compatibility */
+}
