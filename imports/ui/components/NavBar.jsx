@@ -17,6 +17,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Meteor } from 'meteor/meteor';
 import { useNavigate } from 'react-router';
+import { useTracker } from 'meteor/react-meteor-data';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -170,9 +171,14 @@ export default function PrimarySearchAppBar() {
 
 
   const navigate=useNavigate()
-  const logout = () => {Meteor.logout()
-  navigate("/login")
+  const logout = () => {Meteor.logout(()=>{
+
+    navigate("/login")
+  })
   };
+
+  const user = useTracker(() => Meteor.user());
+console.log(user,"ttttt");
 
   return (
     <div className={classes.grow}>
@@ -205,7 +211,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Typography style={{display:'flex',alignItems:"center"}}>
-              Welcome back,<span style={{fontSize:"20px",fontWeight:"bolder",color:"red"}}>samyukth </span>
+              Welcome back,<span style={{fontSize:"30px",fontWeight:"bolder",color:"red",marginLeft:"10px",placeItems:'baseline'}}>{user?.username} </span>
             </Typography>
             
             <IconButton

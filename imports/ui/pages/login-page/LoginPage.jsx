@@ -58,8 +58,10 @@ function LoginPage(props) {
   const submit = e => {
     e.preventDefault();
 console.log("logggg");
-    Meteor.loginWithPassword(username, password);
-    navigate("/")
+    Meteor.loginWithPassword(username, password, ()=> {
+      navigate("/")
+    });
+// console.log("etii");
 
   };
 
