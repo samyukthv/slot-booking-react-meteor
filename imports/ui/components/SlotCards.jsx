@@ -3,8 +3,14 @@ import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import { Container, makeStyles } from '@material-ui/core'
+import Container from '@material-ui/core/Container'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 import SingleSlots from './SingleSlots'
+
+import { useTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import slotsCollection from '../../collection/slotsCollection'
+
 
 
 const useStyles = makeStyles({
@@ -28,7 +34,7 @@ const useStyles = makeStyles({
         height: "auto",
         paddingTop: "30px",
         paddingBottom: "30px",
-        margin:"20px"
+        margin: "20px"
 
     },
     textStyle: {
@@ -49,59 +55,67 @@ const useStyles = makeStyles({
 
 function SlotCards(props) {
     const classes = useStyles(props)
+
+
+
+    const { slots, isLoading } = useTracker(() => {
+        const handler = Meteor.subscribe('slot');
+
+        if (!handler.ready) {
+            return { isLoading: true, slots: [] }
+        }
+
+        const slots = slotsCollection.find({}).fetch()
+        console.log(slots, "kitteeeeeeeeeeeeeeeee");
+        return { slots, isLoading: false }
+    })
+
+
+
+
+console.log(Meteor.userId(),"userrrrrrrrrrr");
+
+
     return (
         <>
+
+
+
             <Box className={classes.boxStyle}>
                 Book Your Slots
-                <Paper className={classes.slots}>
-                    <Typography className={classes.textStyle} >
-                        Platinum
-                    </Typography>
-                    <Typography className={classes.rateStyle} >
-                        Rate :  &#x20b9;350
-                    </Typography>
-                    <Container>
+                {
+                    slots.map((slot) => (
 
-                        <Grid container>
+                        <Paper className={classes.slots}>
 
-                            {/* <Grid item xs={3} spacing={2} > */}
+                            <Typography className={classes.textStyle} >
+                                {slot.category}
+                            </Typography>
+                            <Typography className={classes.rateStyle} >
+                                Rate :  &#x20b9;{slot.price}
+                            </Typography>
+                            <Container>
 
 
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
-                            <SingleSlots />
 
-                            {/* </Grid> */}
-                        </Grid>
+                                <Grid container>
+                                <SingleSlots details={slot.singleSlots}/>
 
-                    </Container>
+
+                                </Grid>
+
+                            </Container>
 
 
 
 
 
-                </Paper>
+                        </Paper>
+                    ))
+                }
             </Box>
+
+
 
         </>
     )

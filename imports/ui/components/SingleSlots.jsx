@@ -57,7 +57,7 @@ const useStyles = makeStyles({
     }
 })
 
-function SingleSlots(props) {
+function SingleSlots({props,details}) {
     const classes = useStyles(props)
     const [open, setOpen] = React.useState(false);
 
@@ -69,14 +69,18 @@ function SingleSlots(props) {
         setOpen(false);
     };
 
- 
     return (
         <>
+         {
+            details.map((single)=>(
 
+           
             <Grid item xs={2}>
 
+            <Grid item md={4}>
+
                 <Card className={classes.singleSlotsCardStyle} onClick={handleOpen}>
-                    1
+                    {single.seatNumber}
                 </Card>
             </Grid>
 
@@ -87,7 +91,7 @@ function SingleSlots(props) {
                 onClose={handleClose}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
-            >
+                >
                 <Box className={classes.boxStyle} >
            <h4 className={classes.fontStyle} >Book My Slot </h4>
            <h2>Confirm Your Ticket</h2>
@@ -100,6 +104,9 @@ function SingleSlots(props) {
            </Button >
         </Box>
             </Modal>
+                </Grid>
+                
+                ))}
         </>
 
     )

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router';
+import { Meteor } from 'meteor/meteor';
 import Box from "@material-ui/core/Box";
 import  Button from "@material-ui/core/Button";
 import  Grid from "@material-ui/core/Grid";
@@ -47,6 +49,19 @@ const useStyles = makeStyles({
 function LoginPage(props) {
 
   const classes = useStyles(props);
+  const navigate=useNavigate()
+
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const submit = e => {
+    e.preventDefault();
+console.log("logggg");
+    Meteor.loginWithPassword(username, password);
+    navigate("/")
+
+  };
 
   return (
     <Grid
@@ -65,7 +80,7 @@ function LoginPage(props) {
           </Typography>
         </Box>
 
-        <form className={classes.formStyle} >
+        <form className={classes.formStyle} onSubmit={submit} >
           <TextField
             name="userName"
             id="standard-basic"
@@ -74,6 +89,7 @@ function LoginPage(props) {
             placeholder="Enter Username"
             variant="standard"
             fullWidth
+            onChange={e => setUsername(e.target.value)}
           />
 
           <TextField
@@ -84,12 +100,14 @@ function LoginPage(props) {
             placeholder="Enter Password"
             variant="standard"
             fullWidth
+            onChange={e => setPassword(e.target.value)}
+
           />
-        </form>
 
         <Button type="submit" variant="outlined" className={classes.loginButton}>
           Login
         </Button>
+        </form>
 
       
       </Paper>

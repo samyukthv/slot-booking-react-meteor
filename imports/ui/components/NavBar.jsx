@@ -14,6 +14,10 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Meteor } from 'meteor/meteor';
+import { useNavigate } from 'react-router';
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -163,6 +167,13 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+
+
+  const navigate=useNavigate()
+  const logout = () => {Meteor.logout()
+  navigate("/login")
+  };
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -193,25 +204,19 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <Typography style={{display:'flex',alignItems:"center"}}>
+              Welcome back,<span style={{fontSize:"20px",fontWeight:"bolder",color:"red"}}>samyukth </span>
+            </Typography>
+            
             <IconButton
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
               color="inherit"
+              onClick={logout}
             >
-              <AccountCircle />
+              <ExitToAppIcon />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
