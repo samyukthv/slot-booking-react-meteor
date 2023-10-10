@@ -4,7 +4,7 @@ import Slots from "../collection/slotsCollection"
 
 
 const singleSlot = Class.create({
-    name: singleSlot,
+    name: 'singleSlot',
     fields: {
         seatNumber: {
             type: Number
@@ -15,7 +15,6 @@ const singleSlot = Class.create({
         bookedUser: {
             type: String
         }
-
 
     }
 })
@@ -28,17 +27,13 @@ const Slot = Class.create({
         category: String,
         price: Number,
         seatCount: Number,
-        singleSeat: {
+        singleSlots: {
             type: [singleSlot],
             default: function () {
                 return [];
             }
-
         }
-
-
     }
-
 });
 
 
