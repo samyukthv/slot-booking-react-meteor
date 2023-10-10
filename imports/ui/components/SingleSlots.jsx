@@ -22,42 +22,42 @@ const useStyles = makeStyles({
 
 
     },
-    boxStyle:{
-        backgroundColor:'white',
-        position:"absolute",
-        display:"flex",
-        flexDirection:"column",
-        alignItems:"center",
-        justifyContent:"center",
-        padding:"30px",
-        borderRadius:"2px",
-        width:"500px",
+    boxStyle: {
+        backgroundColor: 'white',
+        position: "absolute",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "30px",
+        borderRadius: "2px",
+        width: "500px",
         backgroundImage: ' linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%)',
 
 
     },
-    modalStyle:{
-     display:'flex',
-     justifyContent:"center",
-     alignItems:"center"
+    modalStyle: {
+        display: 'flex',
+        justifyContent: "center",
+        alignItems: "center"
     },
-    buttonStyle:{
-        marginTop:"10px",
+    buttonStyle: {
+        marginTop: "10px",
         transition: 'background-color 0.3s',
         '&:hover': {
             backgroundColor: 'green',
         },
-       
+
     },
-    fontStyle:{
+    fontStyle: {
         fontFamily: 'Luckiest Guy, cursive',
-        fontSize:"2rem",
-        color:'white'
+        fontSize: "2rem",
+        color: 'white'
 
     }
 })
 
-function SingleSlots({props,details}) {
+function SingleSlots({ props, details }) {
     const classes = useStyles(props)
     const [open, setOpen] = React.useState(false);
 
@@ -71,41 +71,41 @@ function SingleSlots({props,details}) {
 
     return (
         <>
-         {
-            details.map((single)=>(
-
-           
-            <Grid item xs={2}>
-
-            <Grid item md={4}>
-
-                <Card className={classes.singleSlotsCardStyle} onClick={handleOpen}>
-                    {single.seatNumber}
-                </Card>
-            </Grid>
+            {
+                details.map((single) => (
 
 
-            <Modal
-              className={classes.modalStyle}
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                >
-                <Box className={classes.boxStyle} >
-           <h4 className={classes.fontStyle} >Book My Slot </h4>
-           <h2>Confirm Your Ticket</h2>
-           <h2>user id</h2>
-           <h3>Seat No : seat number</h3>
-           <h3>Category : category</h3>
-           <h3>Price : price</h3>
-           <Button className={classes.buttonStyle}  variant='contained' onClick={()=>setOpen(false)}>
-               buy slot
-           </Button >
-        </Box>
-            </Modal>
-                </Grid>
-                
+                    <Grid item xs={2}>
+
+                        <Grid item md={4}>
+
+                            <Card className={classes.singleSlotsCardStyle} onClick={handleOpen}>
+                                {single.seatNumber}
+                            </Card>
+                        </Grid>
+
+
+                        <Modal
+                            className={classes.modalStyle}
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="simple-modal-title"
+                            aria-describedby="simple-modal-description"
+                        >
+                            <Box className={classes.boxStyle} >
+                                <h4 className={classes.fontStyle} >Book My Slot </h4>
+                                <h2>Confirm Your Ticket</h2>
+                                <h2>user id</h2>
+                                <h3>Seat No : seat number</h3>
+                                <h3>Category : category</h3>
+                                <h3>Price : price</h3>
+                                <Button className={classes.buttonStyle} variant='contained' onClick={() => setOpen(false)}>
+                                    buy slot
+                                </Button >
+                            </Box>
+                        </Modal>
+                    </Grid>
+
                 ))}
         </>
 
