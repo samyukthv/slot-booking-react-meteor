@@ -11,6 +11,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import slotsCollection from '../../collection/slotsCollection'
 
+import { toast, Toaster } from 'react-hot-toast';
 
 
 const useStyles = makeStyles({
@@ -72,10 +73,6 @@ function SlotCards(props) {
 
 
 
-
-console.log(Meteor.userId(),"userrrrrrrrrrr");
-
-
     return (
         <>
 
@@ -99,7 +96,11 @@ console.log(Meteor.userId(),"userrrrrrrrrrr");
 
 
                                 <Grid container>
-                                <SingleSlots details={slot.singleSlots}/>
+                                    {
+                                        slot.singleSlots.map((singleSlot, index) => (
+                                            <SingleSlots categoryId={slot._id} category={slot.category} price={slot.price} single={singleSlot} key={index} />
+                                        ))
+                                    }
 
 
                                 </Grid>
@@ -116,7 +117,7 @@ console.log(Meteor.userId(),"userrrrrrrrrrr");
             </Box>
 
 
-
+<Toaster/>
         </>
     )
 }

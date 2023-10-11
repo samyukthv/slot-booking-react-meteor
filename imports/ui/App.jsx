@@ -4,6 +4,8 @@ import LoginPage from './pages/login-page/LoginPage';
 import HomePage from './pages/home-page/HomePage';
 import UserPublicRoutes from './routing/publicRoute';
 import UserProtectedRoutes from './routing/protectedRoutes';
+import {  Toaster } from 'react-hot-toast';
+
 
 
 const App = () => {

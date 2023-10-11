@@ -4,6 +4,7 @@ import { Accounts } from 'meteor/accounts-base';
 import slotsCollection from '../imports/collection/slotsCollection';
 import Slot from "../imports/classes/slotCategory";
 import '../imports/api/publication/slotPublication';
+import "../imports/api/methods/slotMethods"
 
 
 const SEED_USERNAME = 'samyukth123';

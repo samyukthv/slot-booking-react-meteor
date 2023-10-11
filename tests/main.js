@@ -21,3 +21,25 @@ describe("slot-booking-react", function () {
 
 
 
+// const Activate=()=>{
+//         const seat = slot.seatNo-1
+//         Meteor.call('booked',{seat,user,id}, (err, res)=>{
+//             if (err) {
+//                 alert(`Some Error Occoured in activating: ${err}`);
+//                 return
+//             }
+//             setStatus(false);
+//             setOpen(false);
+//             setSlotuser(Meteor.userId())
+//         })
+//     }
+//     const DeActivate=()=>{
+//         const seat = slot.seatNo-1
+//         Meteor.call('remove',{seat,user,id,slot},(err, res)=>{
+//             if (err) {
+//                 alert(`Some Error Occoured in deactivating: ${err}`);
+//                 return
+//             }
+//             setStatus(true);
+//             setOpen(false);    
+//         })

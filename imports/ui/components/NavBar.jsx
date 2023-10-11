@@ -18,6 +18,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Meteor } from 'meteor/meteor';
 import { useNavigate } from 'react-router';
 import { useTracker } from 'meteor/react-meteor-data';
+import { toast, Toaster } from 'react-hot-toast';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -172,7 +174,9 @@ export default function PrimarySearchAppBar() {
 
   const navigate=useNavigate()
   const logout = () => {Meteor.logout(()=>{
-
+setTimeout(()=>{
+toast.success("successfully loggedout")
+},200)
     navigate("/login")
   })
   };

@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import Box from "@material-ui/core/Box";
-import  Button from "@material-ui/core/Button";
-import  Grid from "@material-ui/core/Grid";
-import Typography  from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from "@material-ui/core";
+import { toast, Toaster } from 'react-hot-toast';
+
 
 const useStyles = makeStyles({
   paperStyle: {
@@ -21,35 +23,35 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center', // Vertically center the content
-    backgroundImage:"linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%)"
+    backgroundImage: "linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%)"
   },
-    gridStyle:{
-      backgroundImage: 'url("https://img.freepik.com/free-vector/prickly-juniper-branch-beige-gray-minimal-background_53876-113047.jpg")',
-      backgroundSize: 'cover',
-      height: '100vh',
-    },
-    loginText:{
-      fontWeight: 'bold', color: 'black',
-    
+  gridStyle: {
+    backgroundImage: 'url("https://img.freepik.com/free-vector/prickly-juniper-branch-beige-gray-minimal-background_53876-113047.jpg")',
+    backgroundSize: 'cover',
+    height: '100vh',
+  },
+  loginText: {
+    fontWeight: 'bold', color: 'black',
 
-    },
-    loginButton:{
-      marginTop: 20,
-    },
-    formStyle:{
-      display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%'
-    },
-    typoStyle:{
-      fontFamily: 'Luckiest Guy, cursive',
-      fontSize:"30px"
-    }
+
+  },
+  loginButton: {
+    marginTop: 20,
+  },
+  formStyle: {
+    display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%'
+  },
+  typoStyle: {
+    fontFamily: 'Luckiest Guy, cursive',
+    fontSize: "30px"
+  }
 });
 
 
 function LoginPage(props) {
 
   const classes = useStyles(props);
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
 
   const [username, setUsername] = useState('');
@@ -57,28 +59,31 @@ function LoginPage(props) {
 
   const submit = e => {
     e.preventDefault();
-console.log("logggg");
-    Meteor.loginWithPassword(username, password, ()=> {
+    Meteor.loginWithPassword(username, password, () => {
+      setTimeout(() => {
+
+        toast.success("logged in successfully")
+      }, 200)
       navigate("/")
     });
-// console.log("etii");
-
+    // console.log("etii");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
   };
 
   return (
     <Grid
-    className={classes.gridStyle}
+      className={classes.gridStyle}
       container
       justifyContent="center"
       alignItems="center">
-     
+
       <Paper elevation={10} className={classes.paperStyle}>
-      <Typography  className={classes.typoStyle}>
-        Book Your SLot
-      </Typography>
+        <Typography className={classes.typoStyle}>
+          Book Your SLot
+        </Typography>
         <Box align="center">
           <Typography variant="h4" className={classes.loginText} >
-            LOGIN 
+            LOGIN
           </Typography>
         </Box>
 
@@ -106,13 +111,14 @@ console.log("logggg");
 
           />
 
-        <Button type="submit" variant="outlined" className={classes.loginButton}>
-          Login
-        </Button>
+          <Button type="submit" variant="outlined" className={classes.loginButton}>
+            Login
+          </Button>
         </form>
 
-      
+
       </Paper>
+      <Toaster />
     </Grid>
   );
 }
